@@ -1,0 +1,40 @@
+
+bool ListInsert(Sqlist& l, int i, int e)
+{
+	if (l.length == Maximum)
+	{
+		cout << "I's full!" << endl;
+		return false;
+	}
+	int j;
+	for (j = l.length; j >= i; --j)
+		l.data[j] = l.data[j - 1];
+	l.data[j] = e;
+	++l.length;
+	return true;
+}
+
+void BinarySearch(Sqlist &l, int x)
+{
+	int low = 0, high = l.length - 1;
+	int temp, mid=0;
+	while (low <= high)
+	{
+		mid = (low + high) / 2;
+		if (l.data[mid] > x)
+			high = mid - 1;
+		else if (l.data[mid] < x)
+			low = mid + 1;
+		else
+		{
+			temp = l.data[mid];
+			l.data[mid] = l.data[mid + 1];
+			l.data[mid + 1] = temp;
+			return;
+		}
+	}
+	if (l.data[mid] < x)
+		ListInsert(l, (mid+2), x);
+	if (l.data[mid] > x)
+		ListInsert(l, ++mid, x);
+}
