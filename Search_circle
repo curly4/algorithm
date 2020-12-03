@@ -1,0 +1,24 @@
+Linknode* Search_circle(Linklist l)
+{
+	Linknode* slow, * rapid;
+	slow = rapid = l;
+	while (slow && rapid && rapid->next)
+	{
+		slow = slow->next;
+		rapid = rapid->next->next;
+		if (slow == rapid)
+			break;
+	}
+	if (slow == rapid)
+	{
+		slow = l;
+		while (slow != rapid)
+		{
+			slow = slow->next;
+			rapid = rapid->next;
+		}
+		return slow;
+	}
+	else
+		return NULL;
+}
